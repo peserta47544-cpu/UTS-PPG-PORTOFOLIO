@@ -1,0 +1,1751 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>E-Portofolio PPG Prajabatan 2026</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,700&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+/* ========== CSS VARIABLES ========== */
+:root {
+  --pink-deep:    #8B1A4A;
+  --pink-dark:    #C2185B;
+  --pink-mid:     #E91E8C;
+  --pink-bright:  #F06292;
+  --pink-soft:    #F8BBD9;
+  --pink-pale:    #FCE4EC;
+  --pink-blush:   #FFF0F6;
+  --pink-glass:   rgba(248,187,217,0.18);
+  --gold:         #D4AF7A;
+  --white:        #FFFFFF;
+  --text-dark:    #2D0A1F;
+  --text-mid:     #6D2048;
+  --shadow-pink:  rgba(194,24,91,0.25);
+  --glass-bg:     rgba(255,255,255,0.12);
+  --glass-border: rgba(248,187,217,0.35);
+}
+
+/* ========== RESET & BASE ========== */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body {
+  font-family: 'DM Sans', sans-serif;
+  background: linear-gradient(135deg, #2D0A1F 0%, #6D2048 30%, #C2185B 60%, #F06292 85%, #FCE4EC 100%);
+  min-height: 100vh;
+  color: var(--text-dark);
+  overflow-x: hidden;
+}
+
+/* ========== ANIMATED BACKGROUND ========== */
+.bg-canvas {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+/* Floating Orbs */
+.orb {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(60px);
+  animation: floatOrb linear infinite;
+  opacity: 0.55;
+}
+.orb-1 { width:500px; height:500px; background:radial-gradient(circle, #E91E8C, #C2185B); top:-100px; left:-150px; animation-duration:18s; }
+.orb-2 { width:350px; height:350px; background:radial-gradient(circle, #F8BBD9, #F06292); top:30%; right:-80px; animation-duration:22s; animation-delay:-7s; }
+.orb-3 { width:420px; height:420px; background:radial-gradient(circle, #8B1A4A, #E91E8C); bottom:10%; left:10%; animation-duration:25s; animation-delay:-12s; }
+.orb-4 { width:280px; height:280px; background:radial-gradient(circle, #FCE4EC, #F8BBD9); top:60%; right:20%; animation-duration:20s; animation-delay:-4s; }
+.orb-5 { width:200px; height:200px; background:radial-gradient(circle, #C2185B, #8B1A4A); top:20%; left:40%; animation-duration:15s; animation-delay:-9s; }
+
+@keyframes floatOrb {
+  0%   { transform: translate(0,0) scale(1); }
+  25%  { transform: translate(40px,-60px) scale(1.08); }
+  50%  { transform: translate(-30px,50px) scale(0.95); }
+  75%  { transform: translate(60px,30px) scale(1.05); }
+  100% { transform: translate(0,0) scale(1); }
+}
+
+/* Falling Petals */
+.petals-layer { position: fixed; inset: 0; z-index: 1; pointer-events: none; }
+.petal {
+  position: absolute;
+  top: -60px;
+  width: 18px;
+  height: 22px;
+  border-radius: 50% 0 50% 0;
+  opacity: 0.75;
+  animation: petalFall linear infinite;
+}
+@keyframes petalFall {
+  0%   { transform: translateY(-60px) rotate(0deg) translateX(0); opacity:0.8; }
+  50%  { transform: translateY(50vh) rotate(180deg) translateX(40px); opacity:0.6; }
+  100% { transform: translateY(110vh) rotate(360deg) translateX(-20px); opacity:0; }
+}
+
+/* ========== NAVBAR ========== */
+.navbar {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 3rem;
+  height: 68px;
+  background: rgba(45,10,31,0.35);
+  backdrop-filter: blur(20px) saturate(180%);
+  -webkit-backdrop-filter: blur(20px) saturate(180%);
+  border-bottom: 1px solid var(--glass-border);
+  box-shadow: 0 4px 30px rgba(0,0,0,0.15);
+}
+.nav-logo {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: var(--pink-soft);
+  letter-spacing: 0.03em;
+}
+.nav-links {
+  display: flex;
+  gap: 0.2rem;
+  list-style: none;
+  position: relative;
+}
+.nav-links > li { position: relative; }
+.nav-links > li > a {
+  display: block;
+  padding: 0.5rem 1rem;
+  color: var(--pink-pale);
+  text-decoration: none;
+  font-size: 0.82rem;
+  font-weight: 500;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  border-radius: 8px;
+  transition: background 0.25s, color 0.25s;
+}
+.nav-links > li > a:hover,
+.nav-links > li:hover > a {
+  background: var(--pink-glass);
+  color: var(--white);
+}
+
+/* Dropdown */
+.dropdown {
+  display: none;
+  position: absolute;
+  top: calc(100% + 6px);
+  left: 0;
+  background: rgba(45,10,31,0.80);
+  backdrop-filter: blur(20px);
+  border: 1px solid var(--glass-border);
+  border-radius: 12px;
+  min-width: 230px;
+  padding: 0.5rem;
+  z-index: 999;
+  box-shadow: 0 20px 60px rgba(0,0,0,0.4);
+}
+.nav-links > li:hover .dropdown { display: block; }
+.dropdown a {
+  display: block;
+  padding: 0.55rem 1rem;
+  color: var(--pink-soft);
+  text-decoration: none;
+  font-size: 0.8rem;
+  border-radius: 8px;
+  transition: background 0.2s;
+}
+.dropdown a:hover { background: var(--pink-glass); color: var(--white); }
+
+/* Sub-dropdown */
+.sub-dropdown-wrapper { position: relative; }
+.sub-dropdown {
+  display: none;
+  position: absolute;
+  left: calc(100% + 4px);
+  top: 0;
+  background: rgba(45,10,31,0.85);
+  backdrop-filter: blur(20px);
+  border: 1px solid var(--glass-border);
+  border-radius: 12px;
+  min-width: 180px;
+  padding: 0.5rem;
+  z-index: 1001;
+  box-shadow: 0 20px 60px rgba(0,0,0,0.4);
+}
+.sub-dropdown-wrapper:hover .sub-dropdown { display: block; }
+.sub-dropdown a {
+  display: block;
+  padding: 0.5rem 0.9rem;
+  color: var(--pink-pale);
+  font-size: 0.78rem;
+  text-decoration: none;
+  border-radius: 8px;
+  transition: background 0.2s;
+}
+.sub-dropdown a:hover { background: var(--pink-glass); color: var(--white); }
+
+/* ========== PAGE LAYOUT ========== */
+.page { position: relative; z-index: 2; }
+.section {
+  min-height: 100vh;
+  padding: 100px 5vw 60px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* ========== HERO SECTION ========== */
+#hero {
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  padding-top: 68px;
+}
+.hero-inner {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2rem;
+  animation: fadeUpIn 1.2s ease both;
+}
+@keyframes fadeUpIn {
+  from { opacity:0; transform:translateY(40px); }
+  to   { opacity:1; transform:translateY(0); }
+}
+.hero-badge {
+  display: inline-block;
+  background: var(--pink-glass);
+  border: 1px solid var(--glass-border);
+  color: var(--pink-soft);
+  font-size: 0.72rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  padding: 0.4rem 1.4rem;
+  border-radius: 50px;
+  backdrop-filter: blur(10px);
+  animation: fadeUpIn 1s 0.2s ease both;
+}
+.hero-title {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(2.4rem, 6vw, 5rem);
+  font-weight: 900;
+  line-height: 1.12;
+  color: var(--white);
+  text-shadow: 0 4px 30px rgba(139,26,74,0.6);
+  animation: fadeUpIn 1s 0.4s ease both;
+}
+.hero-title span {
+  background: linear-gradient(90deg, #FCE4EC, #F06292, #C2185B);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+.hero-subtitle {
+  font-family: 'Cormorant Garamond', serif;
+  font-style: italic;
+  font-size: clamp(1.1rem, 2.5vw, 1.5rem);
+  color: var(--pink-soft);
+  animation: fadeUpIn 1s 0.6s ease both;
+}
+.hero-cta {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+  justify-content: center;
+  animation: fadeUpIn 1s 0.8s ease both;
+}
+.btn-primary {
+  padding: 0.8rem 2.2rem;
+  background: linear-gradient(135deg, #E91E8C, #C2185B);
+  color: var(--white);
+  border: none;
+  border-radius: 50px;
+  font-size: 0.88rem;
+  font-weight: 500;
+  cursor: pointer;
+  text-decoration: none;
+  box-shadow: 0 8px 30px rgba(233,30,140,0.45);
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+.btn-primary:hover { transform: translateY(-3px); box-shadow: 0 14px 40px rgba(233,30,140,0.6); }
+.btn-secondary {
+  padding: 0.8rem 2.2rem;
+  background: var(--glass-bg);
+  color: var(--pink-soft);
+  border: 1px solid var(--glass-border);
+  border-radius: 50px;
+  font-size: 0.88rem;
+  font-weight: 500;
+  cursor: pointer;
+  text-decoration: none;
+  backdrop-filter: blur(12px);
+  transition: background 0.2s, color 0.2s;
+}
+.btn-secondary:hover { background: var(--pink-glass); color: var(--white); }
+
+/* Morphing Hero Frame */
+.hero-photo-wrap {
+  position: relative;
+  width: clamp(220px, 35vw, 340px);
+  animation: fadeUpIn 1s 0.3s ease both;
+}
+.morph-frame {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 1;
+  animation: morphBorder 8s ease-in-out infinite;
+  background: linear-gradient(135deg, #E91E8C 0%, #F8BBD9 50%, #C2185B 100%);
+  padding: 4px;
+  box-shadow: 0 20px 70px rgba(233,30,140,0.5);
+}
+@keyframes morphBorder {
+  0%,100% { border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%; }
+  25%      { border-radius: 30% 60% 70% 40% / 50% 60% 30% 60%; }
+  50%      { border-radius: 50% 50% 50% 50% / 50% 50% 50% 50%; }
+  75%      { border-radius: 40% 70% 40% 60% / 40% 50% 60% 50%; }
+}
+.morph-frame-inner {
+  width: 100%;
+  height: 100%;
+  border-radius: inherit;
+  overflow: hidden;
+  background: linear-gradient(160deg, #FCE4EC, #F8BBD9);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+.photo-placeholder-icon { font-size: 4rem; opacity: 0.4; }
+.photo-placeholder-label {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 0.85rem;
+  color: var(--pink-mid);
+  font-style: italic;
+}
+.morph-frame img { width:100%; height:100%; object-fit:cover; }
+.float-badge {
+  position: absolute;
+  bottom: -16px; right: -20px;
+  background: linear-gradient(135deg, #C2185B, #8B1A4A);
+  color: var(--white);
+  font-size: 0.7rem;
+  padding: 0.5rem 1rem;
+  border-radius: 50px;
+  border: 2px solid rgba(255,255,255,0.2);
+  box-shadow: 0 8px 25px rgba(139,26,74,0.5);
+  white-space: nowrap;
+}
+
+/* ========== SECTION HEADER ========== */
+.section-header {
+  text-align: center;
+  margin-bottom: 3rem;
+  position: relative;
+}
+.section-tag {
+  display: inline-block;
+  font-size: 0.7rem;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: var(--pink-bright);
+  margin-bottom: 0.6rem;
+}
+.section-title {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(2rem, 4.5vw, 3.2rem);
+  font-weight: 700;
+  color: var(--white);
+  text-shadow: 0 4px 20px rgba(139,26,74,0.4);
+  margin-bottom: 0.8rem;
+}
+.section-divider {
+  width: 80px; height: 3px;
+  background: linear-gradient(90deg, #E91E8C, #F8BBD9);
+  border-radius: 10px;
+  margin: 0 auto;
+}
+
+/* ========== GLASS CARD ========== */
+.glass-card {
+  background: rgba(255,255,255,0.10);
+  backdrop-filter: blur(20px) saturate(150%);
+  border: 1px solid var(--glass-border);
+  border-radius: 20px;
+  padding: 2rem;
+  box-shadow: 0 10px 50px rgba(0,0,0,0.15);
+  transition: transform 0.3s, box-shadow 0.3s;
+}
+.glass-card:hover { transform: translateY(-5px); box-shadow: 0 20px 70px rgba(233,30,140,0.25); }
+
+/* ========== PROFIL ========== */
+#profil { background: transparent; }
+.profil-grid {
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+  gap: 2rem;
+  width: 100%;
+  max-width: 1100px;
+  margin-bottom: 2rem;
+}
+.photo-box {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+}
+.photo-upload-frame {
+  width: 100%;
+  aspect-ratio: 3/4;
+  border-radius: 20px;
+  background: linear-gradient(160deg, rgba(248,187,217,0.2), rgba(233,30,140,0.1));
+  border: 2px dashed rgba(248,187,217,0.5);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.8rem;
+  cursor: pointer;
+  transition: border-color 0.3s, background 0.3s;
+}
+.photo-upload-frame:hover { border-color: var(--pink-bright); background: rgba(233,30,140,0.12); }
+.photo-upload-frame img { width:100%; height:100%; object-fit:cover; border-radius:18px; }
+.upload-icon { font-size: 2.5rem; opacity: 0.5; }
+.upload-text { color: var(--pink-soft); font-size: 0.78rem; text-align:center; font-style:italic; }
+.biodata-card { padding: 2rem 2.5rem; }
+.editable-name {
+  font-family: 'Playfair Display', serif;
+  font-size: 2rem;
+  font-weight: 700;
+  color: var(--white);
+  border: none;
+  background: transparent;
+  width: 100%;
+  outline: none;
+  border-bottom: 2px solid rgba(248,187,217,0.3);
+  padding-bottom: 0.3rem;
+  margin-bottom: 1rem;
+  transition: border-color 0.2s;
+}
+.editable-name:focus { border-bottom-color: var(--pink-bright); }
+.biodata-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+  margin-top: 1rem;
+}
+.bio-field { display: flex; flex-direction: column; gap: 0.25rem; }
+.bio-label {
+  font-size: 0.68rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--pink-bright);
+  font-weight: 500;
+}
+.bio-value {
+  background: transparent;
+  border: none;
+  border-bottom: 1px solid rgba(248,187,217,0.25);
+  color: var(--pink-pale);
+  font-family: 'DM Sans', sans-serif;
+  font-size: 0.9rem;
+  padding: 0.3rem 0;
+  outline: none;
+  width: 100%;
+  transition: border-color 0.2s;
+}
+.bio-value:focus { border-bottom-color: var(--pink-bright); }
+.bio-value::placeholder { color: rgba(248,187,217,0.35); }
+
+/* Maps */
+.maps-container {
+  width: 100%;
+  max-width: 1100px;
+  margin-bottom: 2rem;
+}
+.maps-frame {
+  width: 100%;
+  height: 320px;
+  border-radius: 20px;
+  border: 2px dashed rgba(248,187,217,0.4);
+  overflow: hidden;
+  position: relative;
+  background: rgba(255,255,255,0.06);
+  display: flex; flex-direction:column;
+  align-items: center; justify-content: center;
+  gap: 0.5rem;
+}
+.maps-frame iframe {
+  position: absolute; inset:0;
+  width: 100%; height: 100%;
+  border: none; border-radius:18px;
+}
+.maps-hint {
+  color: rgba(248,187,217,0.5);
+  font-size: 0.8rem; font-style: italic;
+  text-align: center;
+  pointer-events: none;
+}
+
+/* Inspirasi & Kutipan */
+.text-cards-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2rem;
+  width: 100%;
+  max-width: 1100px;
+}
+.editable-area {
+  width: 100%;
+  min-height: 120px;
+  background: transparent;
+  border: none;
+  border-radius: 0;
+  color: var(--pink-pale);
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1rem;
+  line-height: 1.7;
+  outline: none;
+  resize: vertical;
+  padding: 0;
+}
+.editable-area::placeholder { color: rgba(248,187,217,0.35); font-style: italic; }
+.kutipan-text {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.4rem;
+  font-style: italic;
+  color: var(--pink-soft);
+  border: none;
+  background: transparent;
+  width: 100%;
+  outline: none;
+  line-height: 1.5;
+  text-align: center;
+  resize: none;
+  padding: 0;
+}
+.kutipan-text::placeholder { color: rgba(248,187,217,0.3); }
+
+/* ========== ARTEFAK ========== */
+.tabs-wrapper { width: 100%; max-width: 1100px; }
+.tabs-nav {
+  display: flex;
+  gap: 0.5rem;
+  margin-bottom: 2rem;
+  flex-wrap: wrap;
+}
+.tab-btn {
+  padding: 0.55rem 1.4rem;
+  border-radius: 50px;
+  border: 1px solid var(--glass-border);
+  background: var(--glass-bg);
+  color: var(--pink-soft);
+  font-size: 0.8rem;
+  font-family: 'DM Sans', sans-serif;
+  cursor: pointer;
+  transition: all 0.25s;
+  backdrop-filter: blur(10px);
+}
+.tab-btn.active,
+.tab-btn:hover {
+  background: linear-gradient(135deg, #E91E8C, #C2185B);
+  color: var(--white);
+  border-color: transparent;
+  box-shadow: 0 6px 20px rgba(233,30,140,0.4);
+}
+.tab-panel { display: none; animation: fadeIn 0.4s ease; }
+.tab-panel.active { display: block; }
+@keyframes fadeIn { from{opacity:0;transform:translateY(10px)} to{opacity:1;transform:translateY(0)} }
+
+.artefak-upload-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 1.5rem;
+  margin-top: 1.5rem;
+}
+.artefak-card {
+  aspect-ratio: 3/4;
+  border-radius: 16px;
+  border: 2px dashed rgba(248,187,217,0.35);
+  background: rgba(255,255,255,0.05);
+  display: flex; flex-direction:column;
+  align-items: center; justify-content: center;
+  gap: 0.6rem;
+  cursor: pointer;
+  transition: all 0.3s;
+  position: relative;
+  overflow: hidden;
+}
+.artefak-card:hover { border-color: var(--pink-bright); background: rgba(233,30,140,0.1); transform:translateY(-4px); }
+.artefak-card img { position:absolute; inset:0; width:100%; height:100%; object-fit:cover; border-radius:14px; }
+.artefak-icon { font-size: 2rem; opacity:0.45; }
+.artefak-label {
+  color: rgba(248,187,217,0.5);
+  font-size: 0.75rem;
+  font-style: italic;
+  text-align: center;
+  padding: 0 1rem;
+}
+.artefak-title-input {
+  background: transparent;
+  border: none;
+  border-bottom: 1px solid rgba(248,187,217,0.25);
+  color: var(--pink-pale);
+  font-family: 'DM Sans';
+  font-size: 0.85rem;
+  outline: none;
+  width: 100%;
+  margin-top: 0.5rem;
+  padding: 0.25rem 0;
+  text-align: center;
+}
+.artefak-title-input::placeholder { color: rgba(248,187,217,0.3); }
+.artefak-title-input:focus { border-bottom-color: var(--pink-bright); }
+.card-inner { padding: 1rem; width:100%; display:flex;flex-direction:column;align-items:center; z-index:2; }
+
+/* ========== PENILAIAN ========== */
+.siklus-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.5rem;
+  width: 100%;
+  max-width: 1100px;
+  margin-top: 1rem;
+}
+.siklus-card { text-align: center; }
+.siklus-badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 52px; height: 52px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #E91E8C, #C2185B);
+  color: var(--white);
+  font-family: 'Playfair Display', serif;
+  font-size: 1.1rem;
+  font-weight: 700;
+  margin-bottom: 1rem;
+  box-shadow: 0 6px 20px rgba(233,30,140,0.4);
+}
+.score-display {
+  font-family: 'Playfair Display', serif;
+  font-size: 3rem;
+  font-weight: 900;
+  background: linear-gradient(90deg, #F8BBD9, #E91E8C);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  border: none;
+  outline: none;
+  width: 120px;
+  text-align: center;
+  display: block;
+  margin: 0 auto;
+  background-clip: text;
+}
+.score-display::placeholder { opacity: 0.3; }
+.score-desc {
+  font-size: 0.78rem;
+  color: var(--pink-soft);
+  margin-top: 0.3rem;
+  display: block;
+  font-style: italic;
+}
+.penilaian-tabs-nav {
+  display: flex;
+  gap: 1rem;
+  margin-bottom: 2rem;
+  flex-wrap: wrap;
+}
+.pen-tab-btn {
+  padding: 0.5rem 1.6rem;
+  border-radius: 50px;
+  border: 1px solid var(--glass-border);
+  background: var(--glass-bg);
+  color: var(--pink-soft);
+  font-size: 0.82rem;
+  cursor: pointer;
+  transition: all 0.25s;
+}
+.pen-tab-btn.active,
+.pen-tab-btn:hover {
+  background: linear-gradient(135deg, #E91E8C, #C2185B);
+  color: var(--white);
+  border-color: transparent;
+}
+.pen-panel { display:none; animation: fadeIn 0.4s ease; }
+.pen-panel.active { display:block; }
+.pen-section-title {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.2rem;
+  color: var(--pink-soft);
+  margin: 2rem 0 1rem;
+  font-style: italic;
+}
+.upload-row {
+  display: flex; flex-wrap: wrap; gap: 1rem; margin-top: 0.5rem;
+}
+.upload-doc-card {
+  flex: 0 0 180px;
+  height: 220px;
+  border-radius: 14px;
+  border: 2px dashed rgba(248,187,217,0.3);
+  background: rgba(255,255,255,0.04);
+  display:flex; flex-direction:column;
+  align-items:center; justify-content:center;
+  gap:0.5rem; cursor:pointer; transition:all 0.3s;
+  position:relative; overflow:hidden;
+}
+.upload-doc-card:hover { border-color:var(--pink-bright); background:rgba(233,30,140,0.08); }
+.upload-doc-card img { position:absolute;inset:0;width:100%;height:100%;object-fit:cover;border-radius:12px; }
+.doc-icon { font-size:1.8rem; opacity:0.4; }
+.doc-label { font-size:0.72rem; color:rgba(248,187,217,0.45); font-style:italic; text-align:center; padding:0 0.5rem; }
+
+/* ========== MODEL GURU ========== */
+#model-guru .section-content {
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+  gap: 2.5rem;
+  width: 100%; max-width: 1100px;
+}
+.guru-photo-frame {
+  display: flex; flex-direction: column; gap: 1rem;
+}
+.guru-photo-box {
+  width: 100%; aspect-ratio: 3/4;
+  border-radius: 20px;
+  background: linear-gradient(160deg, rgba(248,187,217,0.15), rgba(233,30,140,0.08));
+  border: 2px dashed rgba(248,187,217,0.4);
+  display: flex; flex-direction:column;
+  align-items: center; justify-content: center;
+  gap: 0.7rem; cursor:pointer; overflow:hidden;
+  transition: all 0.3s;
+  position:relative;
+}
+.guru-photo-box:hover { border-color:var(--pink-bright); }
+.guru-photo-box img { position:absolute;inset:0;width:100%;height:100%;object-fit:cover;border-radius:18px; }
+.guru-photo-grid {
+  display: grid; grid-template-columns: 1fr 1fr; gap: 0.8rem;
+}
+.guru-mini-photo {
+  aspect-ratio: 1;
+  border-radius: 12px;
+  background: rgba(255,255,255,0.05);
+  border: 2px dashed rgba(248,187,217,0.3);
+  display:flex; align-items:center; justify-content:center;
+  cursor:pointer; overflow:hidden; transition:all 0.3s;
+  position:relative;
+}
+.guru-mini-photo:hover { border-color:var(--pink-bright); }
+.guru-mini-photo img { position:absolute;inset:0;width:100%;height:100%;object-fit:cover;border-radius:10px; }
+.mini-icon { font-size:1.4rem; opacity:0.35; }
+.guru-narasi { display:flex; flex-direction:column; gap:1.2rem; }
+.narasi-heading {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.6rem;
+  font-weight: 700;
+  color: var(--white);
+  border:none; background:transparent;
+  width:100%; outline:none;
+  border-bottom: 2px solid rgba(248,187,217,0.2);
+  padding-bottom: 0.3rem;
+  transition: border-color 0.2s;
+}
+.narasi-heading:focus { border-bottom-color: var(--pink-bright); }
+.narasi-paragraph {
+  width:100%; min-height:140px;
+  background:transparent; border:none;
+  color:var(--pink-pale); font-family:'Cormorant Garamond',serif;
+  font-size:1.05rem; line-height:1.8;
+  outline:none; resize:vertical;
+}
+.narasi-paragraph::placeholder { color:rgba(248,187,217,0.3); font-style:italic; }
+.nilai-list {
+  display: grid; grid-template-columns: repeat(3,1fr); gap: 1rem;
+  margin-top:1rem;
+}
+.nilai-item {
+  background: rgba(255,255,255,0.07);
+  border: 1px solid rgba(248,187,217,0.2);
+  border-radius: 14px; padding: 1rem;
+  display: flex; flex-direction:column; gap:0.4rem;
+  transition: all 0.3s;
+}
+.nilai-item:hover { background: rgba(233,30,140,0.12); border-color: rgba(248,187,217,0.4); }
+.nilai-icon { font-size: 1.5rem; }
+.nilai-name {
+  font-family:'Playfair Display',serif;
+  font-size:0.95rem; font-weight:600;
+  color:var(--pink-soft); border:none;
+  background:transparent; outline:none;
+  width:100%; border-bottom:1px solid rgba(248,187,217,0.2);
+  padding-bottom:0.2rem; transition:border-color 0.2s;
+}
+.nilai-name:focus { border-bottom-color:var(--pink-bright); }
+.nilai-desc {
+  font-size:0.78rem; color:rgba(248,187,217,0.6);
+  background:transparent; border:none;
+  outline:none; width:100%; resize:none;
+  min-height:50px; font-family:'DM Sans',sans-serif;
+  line-height:1.5;
+}
+.nilai-desc::placeholder { color:rgba(248,187,217,0.25); font-style:italic; }
+
+/* ========== FOOTER ========== */
+footer {
+  text-align: center;
+  padding: 2.5rem;
+  background: rgba(45,10,31,0.5);
+  backdrop-filter: blur(20px);
+  border-top: 1px solid var(--glass-border);
+  color: rgba(248,187,217,0.5);
+  font-size: 0.78rem;
+  font-style: italic;
+  position: relative;
+  z-index: 2;
+}
+
+/* ========== SCROLL INDICATOR ========== */
+.scroll-indicator {
+  position: fixed;
+  top: 0; left: 0;
+  height: 3px;
+  background: linear-gradient(90deg, #E91E8C, #F8BBD9, #E91E8C);
+  z-index: 9999;
+  transition: width 0.1s;
+}
+
+/* ========== UTILITY ========== */
+.full-width { width: 100%; max-width: 1100px; }
+.section-spacer { margin: 1.5rem 0; }
+.small-upload-label {
+  display: inline-block;
+  font-size: 0.68rem; letter-spacing:0.1em;
+  text-transform: uppercase;
+  color: var(--pink-bright);
+  margin-top: 0.8rem;
+}
+.card-label {
+  font-family: 'Playfair Display', serif;
+  font-size: 1rem; font-weight: 600;
+  color: var(--pink-soft); margin-bottom: 0.8rem;
+}
+
+/* ========== RESPONSIVE ========== */
+@media (max-width: 768px) {
+  .navbar { padding: 0 1.5rem; }
+  .nav-links { display: none; }
+  .profil-grid, .text-cards-grid, #model-guru .section-content,
+  .siklus-grid, .nilai-list { grid-template-columns: 1fr; }
+  .biodata-grid { grid-template-columns: 1fr; }
+  .guru-photo-grid { grid-template-columns: repeat(2,1fr); }
+  .artefak-upload-grid { grid-template-columns: repeat(2,1fr); }
+}
+
+/* ========== SECTION BG ACCENTS ========== */
+.section:nth-child(even) { background: rgba(45,10,31,0.15); }
+.section:nth-child(odd)  { background: transparent; }
+
+/* Loading overlay on image upload */
+.add-photo-hint {
+  position: absolute;
+  bottom: 0; left:0; right:0;
+  background: linear-gradient(transparent, rgba(45,10,31,0.7));
+  color: var(--pink-pale);
+  font-size: 0.7rem;
+  text-align:center;
+  padding: 0.5rem;
+  border-radius: 0 0 18px 18px;
+  opacity:0;
+  transition: opacity 0.3s;
+}
+.photo-upload-frame:hover .add-photo-hint,
+.guru-photo-box:hover .add-photo-hint,
+.guru-mini-photo:hover .add-photo-hint { opacity:1; }
+</style>
+</head>
+<body>
+
+<!-- SCROLL PROGRESS BAR -->
+<div class="scroll-indicator" id="scrollBar"></div>
+
+<!-- ========== ANIMATED BACKGROUND ========== -->
+<div class="bg-canvas">
+  <div class="orb orb-1"></div>
+  <div class="orb orb-2"></div>
+  <div class="orb orb-3"></div>
+  <div class="orb orb-4"></div>
+  <div class="orb orb-5"></div>
+</div>
+
+<!-- PETALS LAYER -->
+<div class="petals-layer" id="petalsLayer"></div>
+
+<!-- ========== NAVBAR ========== -->
+<nav class="navbar">
+  <div class="nav-logo">✿ E-Portofolio PPG</div>
+  <ul class="nav-links">
+    <li><a href="#hero">Beranda</a></li>
+
+    <li>
+      <a href="#profil">Profil Calon Guru ▾</a>
+      <div class="dropdown">
+        <a href="#biodata">📋 Biodata Mahasiswa</a>
+        <a href="#daerah">🗺️ Keunikan Daerah Asal</a>
+        <a href="#inspirasi">💡 Inspirasi & Tujuan</a>
+        <a href="#kutipan">💬 Kutipan</a>
+      </div>
+    </li>
+
+    <li>
+      <a href="#artefak">Artefak ▾</a>
+      <div class="dropdown">
+        <a href="#teori">📚 Teori Pedagogi</a>
+        <a href="#analisis">🔍 Analisis Produk & Perangkat</a>
+        <a href="#rpm">📄 RPM</a>
+        <a href="#dokumentasi">📷 Dokumentasi</a>
+      </div>
+    </li>
+
+    <li>
+      <a href="#penilaian">Penilaian ▾</a>
+      <div class="dropdown">
+        <div class="sub-dropdown-wrapper">
+          <a href="#pen-perangkat">📊 Penilaian Perangkat ▸</a>
+          <div class="sub-dropdown">
+            <a href="#pp-siklus1">Siklus 1</a>
+            <a href="#pp-siklus2">Siklus 2</a>
+            <a href="#pp-siklus3">Siklus 3</a>
+          </div>
+        </div>
+        <div class="sub-dropdown-wrapper">
+          <a href="#pen-praktik">🎓 Penilaian Praktik ▸</a>
+          <div class="sub-dropdown">
+            <a href="#pm-siklus1">Siklus 1</a>
+            <a href="#pm-siklus2">Siklus 2</a>
+            <a href="#pm-siklus3">Siklus 3</a>
+          </div>
+        </div>
+      </div>
+    </li>
+
+    <li><a href="#model-guru">Model Guru</a></li>
+  </ul>
+</nav>
+
+<!-- ========== PAGE CONTENT ========== -->
+<div class="page">
+
+  <!-- ====== HERO ====== -->
+  <section class="section" id="hero">
+    <div class="hero-inner">
+      <div class="hero-badge">✦ PPG Prajabatan 2026 ✦</div>
+
+      <div class="hero-photo-wrap">
+        <div class="morph-frame" id="heroFrame" onclick="triggerPhotoUpload('heroPhotoInput', 'heroFrame')">
+          <div class="morph-frame-inner" id="heroFrameInner">
+            <span class="photo-placeholder-icon">🌸</span>
+            <span class="photo-placeholder-label">Klik untuk tambah foto</span>
+          </div>
+        </div>
+        <div class="float-badge">✨ Guru Profesional 2026</div>
+        <input type="file" id="heroPhotoInput" accept="image/*" style="display:none" onchange="previewPhotoInFrame(this,'heroFrame','heroFrameInner')">
+      </div>
+
+      <h1 class="hero-title">WELCOME TO<br><span>E-PORTOFOLIO</span><br>MAHASISWA PPG</h1>
+      <p class="hero-subtitle">Program Pendidikan Profesi Guru Prajabatan 2026</p>
+      <div class="hero-cta">
+        <a href="#profil" class="btn-primary">Lihat Profil 🌸</a>
+        <a href="#artefak" class="btn-secondary">Lihat Artefak</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ====== PROFIL ====== -->
+  <section class="section" id="profil">
+    <div class="section-header">
+      <div class="section-tag">✦ Menu 01</div>
+      <h2 class="section-title">Profil Calon Guru</h2>
+      <div class="section-divider"></div>
+    </div>
+
+    <!-- 1) BIODATA -->
+    <div id="biodata" class="full-width section-spacer">
+      <div class="glass-card" style="padding:0;">
+        <div style="padding:1.5rem 2rem; border-bottom:1px solid rgba(248,187,217,0.15);">
+          <span class="section-tag">01 — Biodata Mahasiswa</span>
+        </div>
+        <div class="profil-grid" style="padding:2rem;">
+          <!-- PHOTO SIDE -->
+          <div class="photo-box">
+            <div class="photo-upload-frame" id="profilPhotoFrame" onclick="triggerPhotoUpload('profilPhotoInput','profilPhotoFrame')">
+              <span class="upload-icon">🌸</span>
+              <span class="upload-text">Klik untuk<br>menambahkan foto profil</span>
+              <div class="add-photo-hint">📸 Tambah Foto</div>
+            </div>
+            <input type="file" id="profilPhotoInput" accept="image/*" style="display:none" onchange="previewPhotoInBox(this,'profilPhotoFrame')">
+            <span class="small-upload-label">Foto Profil Mahasiswa</span>
+          </div>
+
+          <!-- BIODATA SIDE -->
+          <div class="biodata-card glass-card" style="border:none;background:transparent;box-shadow:none;">
+            <input type="text" class="editable-name" placeholder="Nama Lengkap Mahasiswa..." maxlength="100">
+            <div class="biodata-grid">
+              <div class="bio-field">
+                <label class="bio-label">NIM / No. Mahasiswa</label>
+                <input type="text" class="bio-value" placeholder="Ketik di sini...">
+              </div>
+              <div class="bio-field">
+                <label class="bio-label">Program Studi</label>
+                <input type="text" class="bio-value" placeholder="Ketik di sini...">
+              </div>
+              <div class="bio-field">
+                <label class="bio-label">Bidang Studi / Mata Pelajaran</label>
+                <input type="text" class="bio-value" placeholder="Ketik di sini...">
+              </div>
+              <div class="bio-field">
+                <label class="bio-label">Universitas / LPTK</label>
+                <input type="text" class="bio-value" placeholder="Ketik di sini...">
+              </div>
+              <div class="bio-field">
+                <label class="bio-label">Tempat, Tanggal Lahir</label>
+                <input type="text" class="bio-value" placeholder="Ketik di sini...">
+              </div>
+              <div class="bio-field">
+                <label class="bio-label">Sekolah Praktik</label>
+                <input type="text" class="bio-value" placeholder="Ketik di sini...">
+              </div>
+              <div class="bio-field">
+                <label class="bio-label">Kabupaten / Kota</label>
+                <input type="text" class="bio-value" placeholder="Ketik di sini...">
+              </div>
+              <div class="bio-field">
+                <label class="bio-label">Email</label>
+                <input type="email" class="bio-value" placeholder="email@gmail.com">
+              </div>
+              <div class="bio-field" style="grid-column:1/-1;">
+                <label class="bio-label">Alamat Lengkap</label>
+                <input type="text" class="bio-value" placeholder="Ketik alamat lengkap...">
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 2) DAERAH ASAL & MAPS -->
+    <div id="daerah" class="full-width section-spacer">
+      <div class="glass-card">
+        <div style="margin-bottom:1.5rem;">
+          <span class="section-tag">02 — Keunikan Daerah Asal</span>
+          <h3 style="font-family:'Playfair Display',serif;color:var(--white);font-size:1.3rem;margin-top:0.5rem;">Dari Mana Asalku?</h3>
+        </div>
+        <div class="maps-container" style="margin:0 0 1.5rem;">
+          <div class="maps-frame" id="mapsFrame">
+            <span style="font-size:2.5rem;opacity:0.35;">🗺️</span>
+            <span class="maps-hint">Tempel embed kode Google Maps di sini<br>Edit HTML → cari id="mapsFrame" → tambahkan tag &lt;iframe&gt;</span>
+            <!-- PASTE YOUR GOOGLE MAPS IFRAME HERE -->
+            <!-- Contoh: <iframe src="https://www.google.com/maps/embed?pb=..." allowfullscreen></iframe> -->
+          </div>
+          <span class="small-upload-label">📍 Lokasi Daerah Asal</span>
+        </div>
+        <div class="bio-field">
+          <label class="bio-label">Nama Daerah Asal</label>
+          <input type="text" class="bio-value" placeholder="Ketik nama daerah asal...">
+        </div>
+        <div style="margin-top:1.2rem;">
+          <label class="bio-label" style="display:block;margin-bottom:0.5rem;">Keunikan & Keistimewaan Daerah Asal</label>
+          <textarea class="editable-area" placeholder="Ceritakan keunikan, budaya, tradisi, kuliner, atau keistimewaan daerah asalmu di sini. Apa yang membuat daerahmu istimewa dan berbeda dari daerah lain?&#10;&#10;(Klik dan mulai mengetik...)"></textarea>
+        </div>
+        <!-- Photo Gallery Daerah -->
+        <div style="margin-top:1.5rem;">
+          <label class="bio-label" style="display:block;margin-bottom:0.8rem;">📸 Foto Daerah Asal</label>
+          <div class="artefak-upload-grid" style="grid-template-columns:repeat(4,1fr);">
+            <div class="artefak-card" onclick="triggerPhotoUpload('daerahPhoto1','daerahPhotoFrame1')" id="daerahPhotoFrame1" style="aspect-ratio:4/3;">
+              <div class="card-inner"><span class="artefak-icon">🌄</span><span class="artefak-label">Foto 1</span></div>
+              <input type="file" id="daerahPhoto1" accept="image/*" style="display:none" onchange="previewPhotoInBox(this,'daerahPhotoFrame1')">
+            </div>
+            <div class="artefak-card" onclick="triggerPhotoUpload('daerahPhoto2','daerahPhotoFrame2')" id="daerahPhotoFrame2" style="aspect-ratio:4/3;">
+              <div class="card-inner"><span class="artefak-icon">🏛️</span><span class="artefak-label">Foto 2</span></div>
+              <input type="file" id="daerahPhoto2" accept="image/*" style="display:none" onchange="previewPhotoInBox(this,'daerahPhotoFrame2')">
+            </div>
+            <div class="artefak-card" onclick="triggerPhotoUpload('daerahPhoto3','daerahPhotoFrame3')" id="daerahPhotoFrame3" style="aspect-ratio:4/3;">
+              <div class="card-inner"><span class="artefak-icon">🌺</span><span class="artefak-label">Foto 3</span></div>
+              <input type="file" id="daerahPhoto3" accept="image/*" style="display:none" onchange="previewPhotoInBox(this,'daerahPhotoFrame3')">
+            </div>
+            <div class="artefak-card" onclick="triggerPhotoUpload('daerahPhoto4','daerahPhotoFrame4')" id="daerahPhotoFrame4" style="aspect-ratio:4/3;">
+              <div class="card-inner"><span class="artefak-icon">🍛</span><span class="artefak-label">Foto 4</span></div>
+              <input type="file" id="daerahPhoto4" accept="image/*" style="display:none" onchange="previewPhotoInBox(this,'daerahPhotoFrame4')">
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 3) INSPIRASI & TUJUAN + KUTIPAN -->
+    <div id="inspirasi" class="full-width section-spacer">
+      <div class="text-cards-grid">
+        <div class="glass-card">
+          <span class="section-tag">03 — Inspirasi & Tujuan</span>
+          <h3 style="font-family:'Playfair Display',serif;color:var(--white);font-size:1.2rem;margin:0.5rem 0 1rem;">Mengapa Aku Ingin Menjadi Guru?</h3>
+          <textarea class="editable-area" style="min-height:200px;" placeholder="Ceritakan inspirasi terbesarmu untuk menjadi guru. Siapa yang menginspirasimu? Pengalaman apa yang mendorongmu? Apa visi dan tujuanmu sebagai guru yang profesional?&#10;&#10;(Klik dan mulai mengetik...)"></textarea>
+          <div style="margin-top:1.5rem;">
+            <label class="bio-label" style="display:block;margin-bottom:0.8rem;">💡 Nilai-Nilai yang Kupegang</label>
+            <div style="display:flex;flex-direction:column;gap:0.5rem;">
+              <input type="text" class="bio-value" placeholder="Nilai 1: contoh — Ikhlas dalam mendidik">
+              <input type="text" class="bio-value" placeholder="Nilai 2: contoh — Kreatif dan inovatif">
+              <input type="text" class="bio-value" placeholder="Nilai 3: contoh — Berpusat pada murid">
+            </div>
+          </div>
+        </div>
+
+        <div id="kutipan" class="glass-card" style="display:flex;flex-direction:column;align-items:center;justify-content:space-between;background:linear-gradient(160deg,rgba(139,26,74,0.25),rgba(233,30,140,0.1));">
+          <span class="section-tag">04 — Kutipan Inspiratif</span>
+          <div style="text-align:center;padding:1rem 0;flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:1.5rem;">
+            <div style="font-size:3rem;opacity:0.3;font-family:'Playfair Display',serif;color:var(--pink-bright);">"</div>
+            <textarea class="kutipan-text" rows="4" placeholder="Tulis kutipan inspiratif yang mencerminkan semangatmu sebagai calon guru..."></textarea>
+            <div style="font-size:3rem;opacity:0.3;font-family:'Playfair Display',serif;color:var(--pink-bright);transform:rotate(180deg);">"</div>
+          </div>
+          <div style="width:100%;border-top:1px solid rgba(248,187,217,0.15);padding-top:1rem;margin-top:1rem;">
+            <label class="bio-label" style="display:block;margin-bottom:0.3rem;">— Sumber Kutipan</label>
+            <input type="text" class="bio-value" placeholder="Nama tokoh / sumber kutipan..." style="text-align:center;font-style:italic;">
+          </div>
+          <!-- Extra Photo for Kutipan Background -->
+          <div style="margin-top:1rem;width:100%;">
+            <span class="small-upload-label">🖼️ Foto Inspirasi (Opsional)</span>
+            <div class="artefak-card" style="aspect-ratio:16/6;margin-top:0.5rem;" onclick="triggerPhotoUpload('kutipanPhoto','kutipanPhotoFrame')" id="kutipanPhotoFrame">
+              <div class="card-inner"><span class="artefak-icon">📸</span><span class="artefak-label">Foto pendukung kutipan</span></div>
+              <input type="file" id="kutipanPhoto" accept="image/*" style="display:none" onchange="previewPhotoInBox(this,'kutipanPhotoFrame')">
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ====== ARTEFAK ====== -->
+  <section class="section" id="artefak">
+    <div class="section-header">
+      <div class="section-tag">✦ Menu 02</div>
+      <h2 class="section-title">Artefak</h2>
+      <div class="section-divider"></div>
+    </div>
+    <div class="tabs-wrapper">
+      <div class="tabs-nav">
+        <button class="tab-btn active" onclick="switchTab(this,'tab-teori')">📚 Teori Pedagogi</button>
+        <button class="tab-btn" onclick="switchTab(this,'tab-analisis')">🔍 Analisis Perangkat</button>
+        <button class="tab-btn" onclick="switchTab(this,'tab-rpm')">📄 RPM</button>
+        <button class="tab-btn" onclick="switchTab(this,'tab-dokumentasi')">📷 Dokumentasi</button>
+      </div>
+
+      <!-- Tab: Teori Pedagogi -->
+      <div class="tab-panel glass-card active" id="tab-teori">
+        <div id="teori">
+          <span class="section-tag">Artefak 01 — Teori Pedagogi</span>
+          <h3 class="pen-section-title">Landasan Teori & Pedagogik</h3>
+          <textarea class="editable-area" style="min-height:100px;" placeholder="Tuliskan ringkasan teori pedagogi yang kamu pelajari selama PPG. Teori apa yang paling relevan dengan bidang studimu?"></textarea>
+          <div style="margin-top:1.5rem;">
+            <label class="bio-label" style="display:block;margin-bottom:0.8rem;">📎 Unggah Dokumen / File Teori</label>
+            <div class="artefak-upload-grid">
+              <div class="artefak-card" onclick="triggerPhotoUpload('teoriFile1','teoriCard1')" id="teoriCard1">
+                <div class="card-inner">
+                  <span class="artefak-icon">📖</span>
+                  <span class="artefak-label">Dokumen Teori 1</span>
+                  <input type="text" class="artefak-title-input" placeholder="Judul dokumen..." onclick="event.stopPropagation()">
+                </div>
+                <input type="file" id="teoriFile1" accept="image/*,.pdf" style="display:none" onchange="previewPhotoInBox(this,'teoriCard1')">
+              </div>
+              <div class="artefak-card" onclick="triggerPhotoUpload('teoriFile2','teoriCard2')" id="teoriCard2">
+                <div class="card-inner">
+                  <span class="artefak-icon">📖</span>
+                  <span class="artefak-label">Dokumen Teori 2</span>
+                  <input type="text" class="artefak-title-input" placeholder="Judul dokumen..." onclick="event.stopPropagation()">
+                </div>
+                <input type="file" id="teoriFile2" accept="image/*,.pdf" style="display:none" onchange="previewPhotoInBox(this,'teoriCard2')">
+              </div>
+              <div class="artefak-card" onclick="triggerPhotoUpload('teoriFile3','teoriCard3')" id="teoriCard3">
+                <div class="card-inner">
+                  <span class="artefak-icon">📖</span>
+                  <span class="artefak-label">Dokumen Teori 3</span>
+                  <input type="text" class="artefak-title-input" placeholder="Judul dokumen..." onclick="event.stopPropagation()">
+                </div>
+                <input type="file" id="teoriFile3" accept="image/*,.pdf" style="display:none" onchange="previewPhotoInBox(this,'teoriCard3')">
+              </div>
+              <div class="artefak-card" onclick="triggerPhotoUpload('teoriFile4','teoriCard4')" id="teoriCard4">
+                <div class="card-inner">
+                  <span class="artefak-icon">📖</span>
+                  <span class="artefak-label">Dokumen Teori 4</span>
+                  <input type="text" class="artefak-title-input" placeholder="Judul dokumen..." onclick="event.stopPropagation()">
+                </div>
+                <input type="file" id="teoriFile4" accept="image/*,.pdf" style="display:none" onchange="previewPhotoInBox(this,'teoriCard4')">
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Tab: Analisis -->
+      <div class="tab-panel glass-card" id="tab-analisis">
+        <div id="analisis">
+          <span class="section-tag">Artefak 02 — Analisis Produk & Perangkat Pembelajaran</span>
+          <h3 class="pen-section-title">Rencana & Perangkat Pembelajaran</h3>
+          <textarea class="editable-area" style="min-height:100px;" placeholder="Tuliskan analisis produk rencana pembelajaran yang kamu kembangkan. Apa kelebihan dan area pengembangannya?"></textarea>
+          <div style="margin-top:1.5rem;">
+            <label class="bio-label" style="display:block;margin-bottom:0.8rem;">📎 Unggah Dokumen Perangkat Pembelajaran</label>
+            <div class="artefak-upload-grid">
+              <div class="artefak-card" onclick="triggerPhotoUpload('analFile1','analCard1')" id="analCard1">
+                <div class="card-inner"><span class="artefak-icon">📋</span><span class="artefak-label">Perangkat 1</span><input type="text" class="artefak-title-input" placeholder="Nama perangkat..." onclick="event.stopPropagation()"></div>
+                <input type="file" id="analFile1" accept="image/*,.pdf" style="display:none" onchange="previewPhotoInBox(this,'analCard1')">
+              </div>
+              <div class="artefak-card" onclick="triggerPhotoUpload('analFile2','analCard2')" id="analCard2">
+                <div class="card-inner"><span class="artefak-icon">📋</span><span class="artefak-label">Perangkat 2</span><input type="text" class="artefak-title-input" placeholder="Nama perangkat..." onclick="event.stopPropagation()"></div>
+                <input type="file" id="analFile2" accept="image/*,.pdf" style="display:none" onchange="previewPhotoInBox(this,'analCard2')">
+              </div>
+              <div class="artefak-card" onclick="triggerPhotoUpload('analFile3','analCard3')" id="analCard3">
+                <div class="card-inner"><span class="artefak-icon">📋</span><span class="artefak-label">Perangkat 3</span><input type="text" class="artefak-title-input" placeholder="Nama perangkat..." onclick="event.stopPropagation()"></div>
+                <input type="file" id="analFile3" accept="image/*,.pdf" style="display:none" onchange="previewPhotoInBox(this,'analCard3')">
+              </div>
+              <div class="artefak-card" onclick="triggerPhotoUpload('analFile4','analCard4')" id="analCard4">
+                <div class="card-inner"><span class="artefak-icon">📋</span><span class="artefak-label">Perangkat 4</span><input type="text" class="artefak-title-input" placeholder="Nama perangkat..." onclick="event.stopPropagation()"></div>
+                <input type="file" id="analFile4" accept="image/*,.pdf" style="display:none" onchange="previewPhotoInBox(this,'analCard4')">
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Tab: RPM -->
+      <div class="tab-panel glass-card" id="tab-rpm">
+        <div id="rpm">
+          <span class="section-tag">Artefak 03 — RPM (Rencana Pelaksanaan Modul)</span>
+          <h3 class="pen-section-title">RPM Setiap Siklus</h3>
+          <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:1.5rem;margin-top:1rem;">
+            <div class="glass-card" style="background:rgba(255,255,255,0.05);">
+              <div class="siklus-badge">1</div>
+              <label class="bio-label" style="display:block;margin-bottom:0.5rem;">RPM Siklus 1</label>
+              <textarea class="editable-area" style="min-height:80px;" placeholder="Deskripsi RPM Siklus 1..."></textarea>
+              <div class="artefak-card" style="aspect-ratio:4/3;margin-top:1rem;" onclick="triggerPhotoUpload('rpm1File','rpm1Card')" id="rpm1Card">
+                <div class="card-inner"><span class="artefak-icon">📄</span><span class="artefak-label">Unggah RPM</span></div>
+                <input type="file" id="rpm1File" accept="image/*,.pdf" style="display:none" onchange="previewPhotoInBox(this,'rpm1Card')">
+              </div>
+            </div>
+            <div class="glass-card" style="background:rgba(255,255,255,0.05);">
+              <div class="siklus-badge">2</div>
+              <label class="bio-label" style="display:block;margin-bottom:0.5rem;">RPM Siklus 2</label>
+              <textarea class="editable-area" style="min-height:80px;" placeholder="Deskripsi RPM Siklus 2..."></textarea>
+              <div class="artefak-card" style="aspect-ratio:4/3;margin-top:1rem;" onclick="triggerPhotoUpload('rpm2File','rpm2Card')" id="rpm2Card">
+                <div class="card-inner"><span class="artefak-icon">📄</span><span class="artefak-label">Unggah RPM</span></div>
+                <input type="file" id="rpm2File" accept="image/*,.pdf" style="display:none" onchange="previewPhotoInBox(this,'rpm2Card')">
+              </div>
+            </div>
+            <div class="glass-card" style="background:rgba(255,255,255,0.05);">
+              <div class="siklus-badge">3</div>
+              <label class="bio-label" style="display:block;margin-bottom:0.5rem;">RPM Siklus 3</label>
+              <textarea class="editable-area" style="min-height:80px;" placeholder="Deskripsi RPM Siklus 3..."></textarea>
+              <div class="artefak-card" style="aspect-ratio:4/3;margin-top:1rem;" onclick="triggerPhotoUpload('rpm3File','rpm3Card')" id="rpm3Card">
+                <div class="card-inner"><span class="artefak-icon">📄</span><span class="artefak-label">Unggah RPM</span></div>
+                <input type="file" id="rpm3File" accept="image/*,.pdf" style="display:none" onchange="previewPhotoInBox(this,'rpm3Card')">
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Tab: Dokumentasi -->
+      <div class="tab-panel glass-card" id="tab-dokumentasi">
+        <div id="dokumentasi">
+          <span class="section-tag">Artefak 04 — Dokumentasi</span>
+          <h3 class="pen-section-title">Galeri Dokumentasi Kegiatan PPG</h3>
+          <textarea class="editable-area" style="min-height:60px;" placeholder="Tulis deskripsi kegiatan dokumentasi di sini..."></textarea>
+          <div class="artefak-upload-grid" style="grid-template-columns:repeat(auto-fill,minmax(180px,1fr));margin-top:1.5rem;">
+            <!-- 8 photo slots for documentation -->
+            <script>
+              for(let i=1;i<=8;i++){
+                document.write(`
+                  <div class="artefak-card" onclick="triggerPhotoUpload('dokFile${i}','dokCard${i}')" id="dokCard${i}" style="aspect-ratio:4/3;">
+                    <div class="card-inner">
+                      <span class="artefak-icon">📸</span>
+                      <span class="artefak-label">Foto ${i}</span>
+                      <input type="text" class="artefak-title-input" placeholder="Keterangan foto..." onclick="event.stopPropagation()">
+                    </div>
+                    <input type="file" id="dokFile${i}" accept="image/*" style="display:none" onchange="previewPhotoInBox(this,'dokCard${i}')">
+                  </div>
+                `);
+              }
+            </script>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ====== PENILAIAN ====== -->
+  <section class="section" id="penilaian">
+    <div class="section-header">
+      <div class="section-tag">✦ Menu 03</div>
+      <h2 class="section-title">Penilaian</h2>
+      <div class="section-divider"></div>
+    </div>
+    <div class="tabs-wrapper">
+      <div class="penilaian-tabs-nav">
+        <button class="pen-tab-btn active" onclick="switchPenTab(this,'pen-perangkat')">📊 Penilaian Perangkat Pembelajaran</button>
+        <button class="pen-tab-btn" onclick="switchPenTab(this,'pen-praktik')">🎓 Penilaian Praktik Mengajar</button>
+      </div>
+
+      <!-- Penilaian Perangkat -->
+      <div class="pen-panel" id="pen-perangkat" style="display:block;">
+        <div class="glass-card full-width">
+          <span class="section-tag">3.1 — Penilaian Perangkat Pembelajaran</span>
+
+          <!-- Siklus Nav -->
+          <div style="display:flex;gap:0.8rem;margin:1rem 0;flex-wrap:wrap;">
+            <button class="tab-btn active" onclick="switchSiklusTab(this,'pp-siklus1','pp')">Siklus 1</button>
+            <button class="tab-btn" onclick="switchSiklusTab(this,'pp-siklus2','pp')">Siklus 2</button>
+            <button class="tab-btn" onclick="switchSiklusTab(this,'pp-siklus3','pp')">Siklus 3</button>
+          </div>
+
+          <!-- PP Siklus 1 -->
+          <div class="tab-panel active" id="pp-siklus1">
+            <h4 class="pen-section-title">Siklus 1 — Penilaian Perangkat</h4>
+            <div class="siklus-grid">
+              <div class="glass-card siklus-card" style="background:rgba(255,255,255,0.05);">
+                <div class="siklus-badge">A</div>
+                <label class="bio-label" style="display:block;margin-bottom:0.5rem;">Aspek Materi</label>
+                <input type="text" class="score-display" placeholder="—" maxlength="5">
+                <span class="score-desc">Nilai / Keterangan</span>
+                <textarea class="editable-area" style="min-height:60px;margin-top:0.8rem;font-size:0.82rem;" placeholder="Catatan penilaian..."></textarea>
+              </div>
+              <div class="glass-card siklus-card" style="background:rgba(255,255,255,0.05);">
+                <div class="siklus-badge">B</div>
+                <label class="bio-label" style="display:block;margin-bottom:0.5rem;">Aspek Pedagogik</label>
+                <input type="text" class="score-display" placeholder="—" maxlength="5">
+                <span class="score-desc">Nilai / Keterangan</span>
+                <textarea class="editable-area" style="min-height:60px;margin-top:0.8rem;font-size:0.82rem;" placeholder="Catatan penilaian..."></textarea>
+              </div>
+              <div class="glass-card siklus-card" style="background:rgba(255,255,255,0.05);">
+                <div class="siklus-badge">C</div>
+                <label class="bio-label" style="display:block;margin-bottom:0.5rem;">Aspek Teknis</label>
+                <input type="text" class="score-display" placeholder="—" maxlength="5">
+                <span class="score-desc">Nilai / Keterangan</span>
+                <textarea class="editable-area" style="min-height:60px;margin-top:0.8rem;font-size:0.82rem;" placeholder="Catatan penilaian..."></textarea>
+              </div>
+            </div>
+            <div style="margin-top:1.5rem;">
+              <label class="bio-label" style="display:block;margin-bottom:0.8rem;">📎 Unggah Dokumen Penilaian Siklus 1</label>
+              <div class="upload-row">
+                <div class="upload-doc-card" onclick="triggerPhotoUpload('ppS1f1','ppS1c1')" id="ppS1c1">
+                  <div style="z-index:2;display:flex;flex-direction:column;align-items:center;gap:0.4rem;"><span class="doc-icon">📄</span><span class="doc-label">Rubrik Penilaian</span></div>
+                  <input type="file" id="ppS1f1" accept="image/*,.pdf" style="display:none" onchange="previewPhotoInBox(this,'ppS1c1')">
+                </div>
+                <div class="upload-doc-card" onclick="triggerPhotoUpload('ppS1f2','ppS1c2')" id="ppS1c2">
+                  <div style="z-index:2;display:flex;flex-direction:column;align-items:center;gap:0.4rem;"><span class="doc-icon">📊</span><span class="doc-label">Rekap Nilai</span></div>
+                  <input type="file" id="ppS1f2" accept="image/*,.pdf" style="display:none" onchange="previewPhotoInBox(this,'ppS1c2')">
+                </div>
+                <div class="upload-doc-card" onclick="triggerPhotoUpload('ppS1f3','ppS1c3')" id="ppS1c3">
+                  <div style="z-index:2;display:flex;flex-direction:column;align-items:center;gap:0.4rem;"><span class="doc-icon">📝</span><span class="doc-label">Feedback</span></div>
+                  <input type="file" id="ppS1f3" accept="image/*,.pdf" style="display:none" onchange="previewPhotoInBox(this,'ppS1c3')">
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- PP Siklus 2 -->
+          <div class="tab-panel" id="pp-siklus2">
+            <h4 class="pen-section-title">Siklus 2 — Penilaian Perangkat</h4>
+            <div class="siklus-grid">
+              <div class="glass-card siklus-card" style="background:rgba(255,255,255,0.05);">
+                <div class="siklus-badge">A</div>
+                <label class="bio-label" style="display:block;margin-bottom:0.5rem;">Aspek Materi</label>
+                <input type="text" class="score-display" placeholder="—" maxlength="5">
+                <span class="score-desc">Nilai / Keterangan</span>
+                <textarea class="editable-area" style="min-height:60px;margin-top:0.8rem;font-size:0.82rem;" placeholder="Catatan penilaian..."></textarea>
+              </div>
+              <div class="glass-card siklus-card" style="background:rgba(255,255,255,0.05);">
+                <div class="siklus-badge">B</div>
+                <label class="bio-label" style="display:block;margin-bottom:0.5rem;">Aspek Pedagogik</label>
+                <input type="text" class="score-display" placeholder="—" maxlength="5">
+                <span class="score-desc">Nilai / Keterangan</span>
+                <textarea class="editable-area" style="min-height:60px;margin-top:0.8rem;font-size:0.82rem;" placeholder="Catatan penilaian..."></textarea>
+              </div>
+              <div class="glass-card siklus-card" style="background:rgba(255,255,255,0.05);">
+                <div class="siklus-badge">C</div>
+                <label class="bio-label" style="display:block;margin-bottom:0.5rem;">Aspek Teknis</label>
+                <input type="text" class="score-display" placeholder="—" maxlength="5">
+                <span class="score-desc">Nilai / Keterangan</span>
+                <textarea class="editable-area" style="min-height:60px;margin-top:0.8rem;font-size:0.82rem;" placeholder="Catatan penilaian..."></textarea>
+              </div>
+            </div>
+            <div style="margin-top:1.5rem;">
+              <label class="bio-label" style="display:block;margin-bottom:0.8rem;">📎 Unggah Dokumen Penilaian Siklus 2</label>
+              <div class="upload-row">
+                <div class="upload-doc-card" onclick="triggerPhotoUpload('ppS2f1','ppS2c1')" id="ppS2c1"><div style="z-index:2;display:flex;flex-direction:column;align-items:center;gap:0.4rem;"><span class="doc-icon">📄</span><span class="doc-label">Rubrik Penilaian</span></div><input type="file" id="ppS2f1" accept="image/*,.pdf" style="display:none" onchange="previewPhotoInBox(this,'ppS2c1')"></div>
+                <div class="upload-doc-card" onclick="triggerPhotoUpload('ppS2f2','ppS2c2')" id="ppS2c2"><div style="z-index:2;display:flex;flex-direction:column;align-items:center;gap:0.4rem;"><span class="doc-icon">📊</span><span class="doc-label">Rekap Nilai</span></div><input type="file" id="ppS2f2" accept="image/*,.pdf" style="display:none" onchange="previewPhotoInBox(this,'ppS2c2')"></div>
+                <div class="upload-doc-card" onclick="triggerPhotoUpload('ppS2f3','ppS2c3')" id="ppS2c3"><div style="z-index:2;display:flex;flex-direction:column;align-items:center;gap:0.4rem;"><span class="doc-icon">📝</span><span class="doc-label">Feedback</span></div><input type="file" id="ppS2f3" accept="image/*,.pdf" style="display:none" onchange="previewPhotoInBox(this,'ppS2c3')"></div>
+              </div>
+            </div>
+          </div>
+
+          <!-- PP Siklus 3 -->
+          <div class="tab-panel" id="pp-siklus3">
+            <h4 class="pen-section-title">Siklus 3 — Penilaian Perangkat</h4>
+            <div class="siklus-grid">
+              <div class="glass-card siklus-card" style="background:rgba(255,255,255,0.05);">
+                <div class="siklus-badge">A</div>
+                <label class="bio-label" style="display:block;margin-bottom:0.5rem;">Aspek Materi</label>
+                <input type="text" class="score-display" placeholder="—" maxlength="5">
+                <span class="score-desc">Nilai / Keterangan</span>
+                <textarea class="editable-area" style="min-height:60px;margin-top:0.8rem;font-size:0.82rem;" placeholder="Catatan penilaian..."></textarea>
+              </div>
+              <div class="glass-card siklus-card" style="background:rgba(255,255,255,0.05);">
+                <div class="siklus-badge">B</div>
+                <label class="bio-label" style="display:block;margin-bottom:0.5rem;">Aspek Pedagogik</label>
+                <input type="text" class="score-display" placeholder="—" maxlength="5">
+                <span class="score-desc">Nilai / Keterangan</span>
+                <textarea class="editable-area" style="min-height:60px;margin-top:0.8rem;font-size:0.82rem;" placeholder="Catatan penilaian..."></textarea>
+              </div>
+              <div class="glass-card siklus-card" style="background:rgba(255,255,255,0.05);">
+                <div class="siklus-badge">C</div>
+                <label class="bio-label" style="display:block;margin-bottom:0.5rem;">Aspek Teknis</label>
+                <input type="text" class="score-display" placeholder="—" maxlength="5">
+                <span class="score-desc">Nilai / Keterangan</span>
+                <textarea class="editable-area" style="min-height:60px;margin-top:0.8rem;font-size:0.82rem;" placeholder="Catatan penilaian..."></textarea>
+              </div>
+            </div>
+            <div style="margin-top:1.5rem;">
+              <label class="bio-label" style="display:block;margin-bottom:0.8rem;">📎 Unggah Dokumen Penilaian Siklus 3</label>
+              <div class="upload-row">
+                <div class="upload-doc-card" onclick="triggerPhotoUpload('ppS3f1','ppS3c1')" id="ppS3c1"><div style="z-index:2;display:flex;flex-direction:column;align-items:center;gap:0.4rem;"><span class="doc-icon">📄</span><span class="doc-label">Rubrik Penilaian</span></div><input type="file" id="ppS3f1" accept="image/*,.pdf" style="display:none" onchange="previewPhotoInBox(this,'ppS3c1')"></div>
+                <div class="upload-doc-card" onclick="triggerPhotoUpload('ppS3f2','ppS3c2')" id="ppS3c2"><div style="z-index:2;display:flex;flex-direction:column;align-items:center;gap:0.4rem;"><span class="doc-icon">📊</span><span class="doc-label">Rekap Nilai</span></div><input type="file" id="ppS3f2" accept="image/*,.pdf" style="display:none" onchange="previewPhotoInBox(this,'ppS3c2')"></div>
+                <div class="upload-doc-card" onclick="triggerPhotoUpload('ppS3f3','ppS3c3')" id="ppS3c3"><div style="z-index:2;display:flex;flex-direction:column;align-items:center;gap:0.4rem;"><span class="doc-icon">📝</span><span class="doc-label">Feedback</span></div><input type="file" id="ppS3f3" accept="image/*,.pdf" style="display:none" onchange="previewPhotoInBox(this,'ppS3c3')"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Penilaian Praktik -->
+      <div class="pen-panel" id="pen-praktik">
+        <div class="glass-card full-width">
+          <span class="section-tag">3.2 — Penilaian Praktik Mengajar</span>
+          <div style="display:flex;gap:0.8rem;margin:1rem 0;flex-wrap:wrap;">
+            <button class="tab-btn active" onclick="switchSiklusTab(this,'pm-siklus1','pm')">Siklus 1</button>
+            <button class="tab-btn" onclick="switchSiklusTab(this,'pm-siklus2','pm')">Siklus 2</button>
+            <button class="tab-btn" onclick="switchSiklusTab(this,'pm-siklus3','pm')">Siklus 3</button>
+          </div>
+
+          <!-- PM Siklus 1 -->
+          <div class="tab-panel active" id="pm-siklus1">
+            <h4 class="pen-section-title">Siklus 1 — Praktik Mengajar</h4>
+            <div style="display:grid;grid-template-columns:1fr 1fr;gap:1.5rem;">
+              <div class="glass-card" style="background:rgba(255,255,255,0.05);">
+                <label class="bio-label" style="display:block;margin-bottom:0.5rem;">Topik / Materi Ajar</label>
+                <input type="text" class="bio-value" placeholder="Ketik topik ajar...">
+                <label class="bio-label" style="display:block;margin:0.8rem 0 0.3rem;">Tanggal Praktik</label>
+                <input type="date" class="bio-value">
+                <label class="bio-label" style="display:block;margin:0.8rem 0 0.3rem;">Kelas / Jenjang</label>
+                <input type="text" class="bio-value" placeholder="Contoh: Kelas X IPA 2">
+              </div>
+              <div class="glass-card" style="background:rgba(255,255,255,0.05);text-align:center;">
+                <label class="bio-label" style="display:block;margin-bottom:0.8rem;">Nilai Akhir Praktik</label>
+                <input type="text" class="score-display" placeholder="A" style="font-size:4rem;" maxlength="5">
+                <span class="score-desc">Nilai Akhir / Predikat</span>
+                <textarea class="editable-area" style="min-height:80px;margin-top:1rem;font-size:0.82rem;text-align:left;" placeholder="Catatan / feedback dari penilai..."></textarea>
+              </div>
+            </div>
+            <div style="margin-top:1.5rem;">
+              <label class="bio-label" style="display:block;margin-bottom:0.8rem;">📸 Dokumentasi Praktik Siklus 1</label>
+              <div class="artefak-upload-grid" style="grid-template-columns:repeat(4,1fr);">
+                <div class="artefak-card" style="aspect-ratio:4/3;" onclick="triggerPhotoUpload('pm1p1','pm1c1')" id="pm1c1"><div class="card-inner"><span class="artefak-icon">📸</span><span class="artefak-label">Foto 1</span></div><input type="file" id="pm1p1" accept="image/*" style="display:none" onchange="previewPhotoInBox(this,'pm1c1')"></div>
+                <div class="artefak-card" style="aspect-ratio:4/3;" onclick="triggerPhotoUpload('pm1p2','pm1c2')" id="pm1c2"><div class="card-inner"><span class="artefak-icon">📸</span><span class="artefak-label">Foto 2</span></div><input type="file" id="pm1p2" accept="image/*" style="display:none" onchange="previewPhotoInBox(this,'pm1c2')"></div>
+                <div class="artefak-card" style="aspect-ratio:4/3;" onclick="triggerPhotoUpload('pm1p3','pm1c3')" id="pm1c3"><div class="card-inner"><span class="artefak-icon">📸</span><span class="artefak-label">Foto 3</span></div><input type="file" id="pm1p3" accept="image/*" style="display:none" onchange="previewPhotoInBox(this,'pm1c3')"></div>
+                <div class="artefak-card" style="aspect-ratio:4/3;" onclick="triggerPhotoUpload('pm1p4','pm1c4')" id="pm1c4"><div class="card-inner"><span class="artefak-icon">📸</span><span class="artefak-label">Foto 4</span></div><input type="file" id="pm1p4" accept="image/*" style="display:none" onchange="previewPhotoInBox(this,'pm1c4')"></div>
+              </div>
+              <label class="bio-label" style="display:block;margin:1.2rem 0 0.8rem;">📎 Dokumen Penilaian</label>
+              <div class="upload-row">
+                <div class="upload-doc-card" onclick="triggerPhotoUpload('pm1df1','pm1dc1')" id="pm1dc1"><div style="z-index:2;display:flex;flex-direction:column;align-items:center;gap:0.4rem;"><span class="doc-icon">📄</span><span class="doc-label">Lembar Observasi</span></div><input type="file" id="pm1df1" accept="image/*,.pdf" style="display:none" onchange="previewPhotoInBox(this,'pm1dc1')"></div>
+                <div class="upload-doc-card" onclick="triggerPhotoUpload('pm1df2','pm1dc2')" id="pm1dc2"><div style="z-index:2;display:flex;flex-direction:column;align-items:center;gap:0.4rem;"><span class="doc-icon">📝</span><span class="doc-label">Formulir Penilaian</span></div><input type="file" id="pm1df2" accept="image/*,.pdf" style="display:none" onchange="previewPhotoInBox(this,'pm1dc2')"></div>
+              </div>
+            </div>
+          </div>
+
+          <!-- PM Siklus 2 -->
+          <div class="tab-panel" id="pm-siklus2">
+            <h4 class="pen-section-title">Siklus 2 — Praktik Mengajar</h4>
+            <div style="display:grid;grid-template-columns:1fr 1fr;gap:1.5rem;">
+              <div class="glass-card" style="background:rgba(255,255,255,0.05);">
+                <label class="bio-label" style="display:block;margin-bottom:0.5rem;">Topik / Materi Ajar</label>
+                <input type="text" class="bio-value" placeholder="Ketik topik ajar...">
+                <label class="bio-label" style="display:block;margin:0.8rem 0 0.3rem;">Tanggal Praktik</label>
+                <input type="date" class="bio-value">
+                <label class="bio-label" style="display:block;margin:0.8rem 0 0.3rem;">Kelas / Jenjang</label>
+                <input type="text" class="bio-value" placeholder="Contoh: Kelas X IPA 2">
+              </div>
+              <div class="glass-card" style="background:rgba(255,255,255,0.05);text-align:center;">
+                <label class="bio-label" style="display:block;margin-bottom:0.8rem;">Nilai Akhir Praktik</label>
+                <input type="text" class="score-display" placeholder="A" style="font-size:4rem;" maxlength="5">
+                <span class="score-desc">Nilai Akhir / Predikat</span>
+                <textarea class="editable-area" style="min-height:80px;margin-top:1rem;font-size:0.82rem;text-align:left;" placeholder="Catatan / feedback dari penilai..."></textarea>
+              </div>
+            </div>
+            <div style="margin-top:1.5rem;">
+              <label class="bio-label" style="display:block;margin-bottom:0.8rem;">📸 Dokumentasi Praktik Siklus 2</label>
+              <div class="artefak-upload-grid" style="grid-template-columns:repeat(4,1fr);">
+                <div class="artefak-card" style="aspect-ratio:4/3;" onclick="triggerPhotoUpload('pm2p1','pm2c1')" id="pm2c1"><div class="card-inner"><span class="artefak-icon">📸</span><span class="artefak-label">Foto 1</span></div><input type="file" id="pm2p1" accept="image/*" style="display:none" onchange="previewPhotoInBox(this,'pm2c1')"></div>
+                <div class="artefak-card" style="aspect-ratio:4/3;" onclick="triggerPhotoUpload('pm2p2','pm2c2')" id="pm2c2"><div class="card-inner"><span class="artefak-icon">📸</span><span class="artefak-label">Foto 2</span></div><input type="file" id="pm2p2" accept="image/*" style="display:none" onchange="previewPhotoInBox(this,'pm2c2')"></div>
+                <div class="artefak-card" style="aspect-ratio:4/3;" onclick="triggerPhotoUpload('pm2p3','pm2c3')" id="pm2c3"><div class="card-inner"><span class="artefak-icon">📸</span><span class="artefak-label">Foto 3</span></div><input type="file" id="pm2p3" accept="image/*" style="display:none" onchange="previewPhotoInBox(this,'pm2c3')"></div>
+                <div class="artefak-card" style="aspect-ratio:4/3;" onclick="triggerPhotoUpload('pm2p4','pm2c4')" id="pm2c4"><div class="card-inner"><span class="artefak-icon">📸</span><span class="artefak-label">Foto 4</span></div><input type="file" id="pm2p4" accept="image/*" style="display:none" onchange="previewPhotoInBox(this,'pm2c4')"></div>
+              </div>
+            </div>
+          </div>
+
+          <!-- PM Siklus 3 -->
+          <div class="tab-panel" id="pm-siklus3">
+            <h4 class="pen-section-title">Siklus 3 — Praktik Mengajar</h4>
+            <div style="display:grid;grid-template-columns:1fr 1fr;gap:1.5rem;">
+              <div class="glass-card" style="background:rgba(255,255,255,0.05);">
+                <label class="bio-label" style="display:block;margin-bottom:0.5rem;">Topik / Materi Ajar</label>
+                <input type="text" class="bio-value" placeholder="Ketik topik ajar...">
+                <label class="bio-label" style="display:block;margin:0.8rem 0 0.3rem;">Tanggal Praktik</label>
+                <input type="date" class="bio-value">
+                <label class="bio-label" style="display:block;margin:0.8rem 0 0.3rem;">Kelas / Jenjang</label>
+                <input type="text" class="bio-value" placeholder="Contoh: Kelas X IPA 2">
+              </div>
+              <div class="glass-card" style="background:rgba(255,255,255,0.05);text-align:center;">
+                <label class="bio-label" style="display:block;margin-bottom:0.8rem;">Nilai Akhir Praktik</label>
+                <input type="text" class="score-display" placeholder="A" style="font-size:4rem;" maxlength="5">
+                <span class="score-desc">Nilai Akhir / Predikat</span>
+                <textarea class="editable-area" style="min-height:80px;margin-top:1rem;font-size:0.82rem;text-align:left;" placeholder="Catatan / feedback dari penilai..."></textarea>
+              </div>
+            </div>
+            <div style="margin-top:1.5rem;">
+              <label class="bio-label" style="display:block;margin-bottom:0.8rem;">📸 Dokumentasi Praktik Siklus 3</label>
+              <div class="artefak-upload-grid" style="grid-template-columns:repeat(4,1fr);">
+                <div class="artefak-card" style="aspect-ratio:4/3;" onclick="triggerPhotoUpload('pm3p1','pm3c1')" id="pm3c1"><div class="card-inner"><span class="artefak-icon">📸</span><span class="artefak-label">Foto 1</span></div><input type="file" id="pm3p1" accept="image/*" style="display:none" onchange="previewPhotoInBox(this,'pm3c1')"></div>
+                <div class="artefak-card" style="aspect-ratio:4/3;" onclick="triggerPhotoUpload('pm3p2','pm3c2')" id="pm3c2"><div class="card-inner"><span class="artefak-icon">📸</span><span class="artefak-label">Foto 2</span></div><input type="file" id="pm3p2" accept="image/*" style="display:none" onchange="previewPhotoInBox(this,'pm3c2')"></div>
+                <div class="artefak-card" style="aspect-ratio:4/3;" onclick="triggerPhotoUpload('pm3p3','pm3c3')" id="pm3c3"><div class="card-inner"><span class="artefak-icon">📸</span><span class="artefak-label">Foto 3</span></div><input type="file" id="pm3p3" accept="image/*" style="display:none" onchange="previewPhotoInBox(this,'pm3c3')"></div>
+                <div class="artefak-card" style="aspect-ratio:4/3;" onclick="triggerPhotoUpload('pm3p4','pm3c4')" id="pm3c4"><div class="card-inner"><span class="artefak-icon">📸</span><span class="artefak-label">Foto 4</span></div><input type="file" id="pm3p4" accept="image/*" style="display:none" onchange="previewPhotoInBox(this,'pm3c4')"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ====== MODEL GURU ====== -->
+  <section class="section" id="model-guru">
+    <div class="section-header">
+      <div class="section-tag">✦ Menu 04</div>
+      <h2 class="section-title">Model Guru</h2>
+      <div class="section-divider"></div>
+    </div>
+    <div class="section-content">
+      <!-- PHOTO COLUMN -->
+      <div class="guru-photo-frame">
+        <div class="guru-photo-box" onclick="triggerPhotoUpload('guruMainPhoto','guruPhotoMain')" id="guruPhotoMain">
+          <span class="upload-icon" style="font-size:2rem;">🌸</span>
+          <span class="upload-text" style="color:rgba(248,187,217,0.5);font-size:0.78rem;text-align:center;font-style:italic;">Foto Utama<br>Model Guru</span>
+          <div class="add-photo-hint">📸 Tambah Foto Utama</div>
+        </div>
+        <input type="file" id="guruMainPhoto" accept="image/*" style="display:none" onchange="previewPhotoInBox(this,'guruPhotoMain')">
+        <label class="bio-label" style="display:block;text-align:center;margin-top:0.5rem;">Foto Utama</label>
+        <div class="guru-photo-grid">
+          <div class="guru-mini-photo" onclick="triggerPhotoUpload('guruMini1','guruMiniCard1')" id="guruMiniCard1">
+            <span class="mini-icon">📸</span>
+            <div class="add-photo-hint">Foto</div>
+            <input type="file" id="guruMini1" accept="image/*" style="display:none" onchange="previewPhotoInBox(this,'guruMiniCard1')">
+          </div>
+          <div class="guru-mini-photo" onclick="triggerPhotoUpload('guruMini2','guruMiniCard2')" id="guruMiniCard2">
+            <span class="mini-icon">📸</span>
+            <div class="add-photo-hint">Foto</div>
+            <input type="file" id="guruMini2" accept="image/*" style="display:none" onchange="previewPhotoInBox(this,'guruMiniCard2')">
+          </div>
+          <div class="guru-mini-photo" onclick="triggerPhotoUpload('guruMini3','guruMiniCard3')" id="guruMiniCard3">
+            <span class="mini-icon">📸</span>
+            <div class="add-photo-hint">Foto</div>
+            <input type="file" id="guruMini3" accept="image/*" style="display:none" onchange="previewPhotoInBox(this,'guruMiniCard3')">
+          </div>
+          <div class="guru-mini-photo" onclick="triggerPhotoUpload('guruMini4','guruMiniCard4')" id="guruMiniCard4">
+            <span class="mini-icon">📸</span>
+            <div class="add-photo-hint">Foto</div>
+            <input type="file" id="guruMini4" accept="image/*" style="display:none" onchange="previewPhotoInBox(this,'guruMiniCard4')">
+          </div>
+        </div>
+      </div>
+
+      <!-- NARASI COLUMN -->
+      <div class="guru-narasi glass-card">
+        <input type="text" class="narasi-heading" placeholder="Nama Model Guru / Judul Narasi...">
+        <div>
+          <label class="bio-label" style="display:block;margin-bottom:0.5rem;">Profil Singkat</label>
+          <textarea class="narasi-paragraph" placeholder="Tuliskan profil singkat guru inspiratif yang menjadi modelmu. Siapa beliau? Apa latar belakangnya? Mengapa beliau menjadi inspirasi bagimu?&#10;&#10;(Klik dan mulai mengetik...)"></textarea>
+        </div>
+        <div>
+          <label class="bio-label" style="display:block;margin-bottom:0.5rem;">Filosofi & Pendekatan Mengajar</label>
+          <textarea class="narasi-paragraph" placeholder="Bagaimana filosofi mengajar sang model guru? Pendekatan apa yang ia gunakan? Apa yang membuat cara mengajarnya efektif dan menginspirasi?&#10;&#10;(Klik dan mulai mengetik...)"></textarea>
+        </div>
+        <div>
+          <label class="bio-label" style="display:block;margin-bottom:0.5rem;">Apa yang Aku Pelajari & Terapkan</label>
+          <textarea class="narasi-paragraph" placeholder="Nilai, metode, atau sikap apa yang kamu ambil dari model guru ini? Bagaimana kamu menerapkannya dalam praktik mengajarmu sendiri?&#10;&#10;(Klik dan mulai mengetik...)"></textarea>
+        </div>
+
+        <!-- Nilai-nilai Model Guru -->
+        <div>
+          <label class="bio-label" style="display:block;margin-bottom:0.8rem;">🌟 Nilai-Nilai Keteladanan</label>
+          <div class="nilai-list">
+            <div class="nilai-item">
+              <span class="nilai-icon">💡</span>
+              <input type="text" class="nilai-name" value="Inovatif" placeholder="Nama nilai...">
+              <textarea class="nilai-desc" placeholder="Deskripsi nilai...">Selalu menghadirkan metode dan media pembelajaran yang segar dan bermakna.</textarea>
+            </div>
+            <div class="nilai-item">
+              <span class="nilai-icon">❤️</span>
+              <input type="text" class="nilai-name" value="Empatik" placeholder="Nama nilai...">
+              <textarea class="nilai-desc" placeholder="Deskripsi nilai...">Memahami kebutuhan setiap murid dan hadir dengan hati yang tulus.</textarea>
+            </div>
+            <div class="nilai-item">
+              <span class="nilai-icon">📚</span>
+              <input type="text" class="nilai-name" value="Reflektif" placeholder="Nama nilai...">
+              <textarea class="nilai-desc" placeholder="Deskripsi nilai...">Terus belajar dan tumbuh dari setiap pengalaman di kelas.</textarea>
+            </div>
+            <div class="nilai-item">
+              <span class="nilai-icon">🌱</span>
+              <input type="text" class="nilai-name" placeholder="Nama nilai...">
+              <textarea class="nilai-desc" placeholder="Deskripsi nilai..."></textarea>
+            </div>
+            <div class="nilai-item">
+              <span class="nilai-icon">✨</span>
+              <input type="text" class="nilai-name" placeholder="Nama nilai...">
+              <textarea class="nilai-desc" placeholder="Deskripsi nilai..."></textarea>
+            </div>
+            <div class="nilai-item">
+              <span class="nilai-icon">🎯</span>
+              <input type="text" class="nilai-name" placeholder="Nama nilai...">
+              <textarea class="nilai-desc" placeholder="Deskripsi nilai..."></textarea>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</div><!-- end .page -->
+
+<!-- ========== FOOTER ========== -->
+<footer>
+  <div style="font-family:'Playfair Display',serif;font-size:1rem;color:rgba(248,187,217,0.7);margin-bottom:0.5rem;">✿ E-Portofolio PPG Prajabatan 2026 ✿</div>
+  <p>Dibuat dengan ❤️ — Template dapat diedit langsung di browser</p>
+  <p style="margin-top:0.3rem;font-size:0.7rem;opacity:0.5;">Klik pada kolom mana pun untuk mengedit teks • Klik pada area foto untuk mengunggah gambar</p>
+</footer>
+
+<!-- ========== JAVASCRIPT ========== -->
+<script>
+// ---- PETAL GENERATOR ----
+(function(){
+  const layer = document.getElementById('petalsLayer');
+  const colors = ['#E91E8C','#F06292','#F8BBD9','#C2185B','#FCE4EC','#AD1457','#F48FB1'];
+  const count = 28;
+  for(let i=0;i<count;i++){
+    const p = document.createElement('div');
+    p.className = 'petal';
+    p.style.left = Math.random()*100 + 'vw';
+    p.style.background = colors[Math.floor(Math.random()*colors.length)];
+    p.style.width = (12 + Math.random()*14) + 'px';
+    p.style.height = (14 + Math.random()*18) + 'px';
+    p.style.animationDuration = (8 + Math.random()*18) + 's';
+    p.style.animationDelay = (-Math.random()*20) + 's';
+    p.style.opacity = 0.4 + Math.random()*0.5;
+    const rot = Math.random()*360;
+    p.style.transform = `rotate(${rot}deg)`;
+    p.style.borderRadius = Math.random() > 0.5 ? '50% 0 50% 0' : '60% 40% 60% 40%';
+    layer.appendChild(p);
+  }
+})();
+
+// ---- SCROLL PROGRESS ----
+window.addEventListener('scroll', function(){
+  const bar = document.getElementById('scrollBar');
+  const pct = (window.scrollY / (document.documentElement.scrollHeight - window.innerHeight)) * 100;
+  bar.style.width = pct + '%';
+});
+
+// ---- TAB SWITCHER (Artefak) ----
+function switchTab(btn, panelId) {
+  document.querySelectorAll('.tabs-wrapper > .tabs-nav .tab-btn').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  btn.closest('.tabs-wrapper').querySelectorAll('.tab-panel').forEach(p => {
+    if(p.parentElement === btn.closest('.tabs-wrapper') || p.parentElement.parentElement === btn.closest('.tabs-wrapper')) {
+      p.classList.remove('active');
+    }
+  });
+  // only top-level panels
+  btn.closest('.tabs-wrapper').querySelectorAll(':scope > .tab-panel').forEach(p => p.classList.remove('active'));
+  document.getElementById(panelId).classList.add('active');
+}
+
+// ---- PENILAIAN TAB ----
+function switchPenTab(btn, panelId) {
+  document.querySelectorAll('.penilaian-tabs-nav .pen-tab-btn').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  document.querySelectorAll('.pen-panel').forEach(p => p.style.display = 'none');
+  document.getElementById(panelId).style.display = 'block';
+}
+
+// ---- SIKLUS TAB ----
+function switchSiklusTab(btn, panelId, prefix) {
+  const parent = btn.closest('.glass-card');
+  parent.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  parent.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
+  document.getElementById(panelId).classList.add('active');
+}
+
+// ---- PHOTO UPLOAD ----
+function triggerPhotoUpload(inputId, frameId) {
+  document.getElementById(inputId).click();
+}
+
+function previewPhotoInFrame(input, frameId, innerFrameId) {
+  if (!input.files || !input.files[0]) return;
+  const reader = new FileReader();
+  reader.onload = function(e) {
+    const frame = document.getElementById(frameId);
+    const inner = document.getElementById(innerFrameId);
+    inner.innerHTML = '';
+    const img = document.createElement('img');
+    img.src = e.target.result;
+    inner.appendChild(img);
+  };
+  reader.readAsDataURL(input.files[0]);
+}
+
+function previewPhotoInBox(input, boxId) {
+  if (!input.files || !input.files[0]) return;
+  const reader = new FileReader();
+  reader.onload = function(e) {
+    const box = document.getElementById(boxId);
+    // remove placeholder children but keep input
+    const inp = box.querySelector('input[type="file"]');
+    const cardInner = box.querySelector('.card-inner');
+    if(cardInner) cardInner.style.opacity = '0';
+    // remove existing preview
+    const existImg = box.querySelector('img.preview');
+    if(existImg) existImg.remove();
+    const img = document.createElement('img');
+    img.src = e.target.result;
+    img.className = 'preview';
+    img.style.cssText = 'position:absolute;inset:0;width:100%;height:100%;object-fit:cover;border-radius:inherit;z-index:1;';
+    box.insertBefore(img, box.firstChild);
+  };
+  reader.readAsDataURL(input.files[0]);
+}
+
+// ---- INIT: make pen-perangkat visible ----
+document.getElementById('pen-perangkat').style.display = 'block';
+document.getElementById('pen-praktik').style.display = 'none';
+</script>
+</body>
+</html>
