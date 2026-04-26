@@ -1747,5 +1747,157 @@ function previewPhotoInBox(input, boxId) {
 document.getElementById('pen-perangkat').style.display = 'block';
 document.getElementById('pen-praktik').style.display = 'none';
 </script>
+<script>
+/* ═══════════════════════════════════════════════════════════════
+   AUTO-SAVE PPG PORTOFOLIO — Paste sebelum </body> di index.html
+   ✅ Teks & foto tersimpan otomatis di localStorage browser
+   ✅ Data tidak hilang saat refresh / tutup browser
+   ✅ Badge "Tersimpan otomatis" muncul di pojok kanan bawah
+   ✅ Tombol Reset tersedia di pojok kiri bawah
+   ═══════════════════════════════════════════════════════════════ */
+(function(){
+  const TK='ppg_porto_data', IK='ppg_porto_images';
+  let timer=null, restoring=false;
+
+  function loadData(){try{return JSON.parse(localStorage.getItem(TK)||'{}')}catch(e){return {}}}
+  function loadImgs(){try{return JSON.parse(localStorage.getItem(IK)||'{}')}catch(e){return {}}}
+
+  function uid(el){
+    if(el.id) return 'id__'+el.id;
+    const p=[];let c=el;
+    while(c&&c!==document.body){
+      const par=c.parentElement;
+      if(!par)break;
+      p.unshift(c.tagName+'_'+Array.from(par.children).indexOf(c));
+      c=par;
+    }
+    return 'path__'+p.join('_');
+  }
+
+  function saveTexts(){
+    const d=loadData();
+    document.querySelectorAll('[contenteditable="true"]').forEach(el=>{d[uid(el)]=el.innerHTML});
+    try{localStorage.setItem(TK,JSON.stringify(d))}catch(e){}
+  }
+
+  function restoreTexts(){
+    restoring=true;
+    const d=loadData();
+    document.querySelectorAll('[contenteditable="true"]').forEach(el=>{
+      const v=d[uid(el)];
+      if(v!=null&&v!=undefined) el.innerHTML=v;
+    });
+    restoring=false;
+  }
+
+  function compress(file,cb,q=0.75,mx=1200){
+    const r=new FileReader();
+    r.onload=e=>{
+      const img=new Image();
+      img.onload=()=>{
+        let w=img.width,h=img.height;
+        if(w>mx){h=Math.round(h*mx/w);w=mx}
+        const cv=document.createElement('canvas');
+        cv.width=w;cv.height=h;
+        cv.getContext('2d').drawImage(img,0,0,w,h);
+        cb(cv.toDataURL('image/jpeg',q));
+      };
+      img.src=e.target.result;
+    };
+    r.readAsDataURL(file);
+  }
+
+  function saveImg(k,b64){
+    const imgs=loadImgs();imgs[k]=b64;
+    try{localStorage.setItem(IK,JSON.stringify(imgs))}catch(e){}
+  }
+
+  function restoreImgs(){
+    const imgs=loadImgs();
+    Object.entries(imgs).forEach(([k,b64])=>{
+      const el=document.querySelector(`[data-img-key="${k}"]`);
+      if(!el||!b64) return;
+      if(el.tagName==='IMG'){
+        el.src=b64;
+      } else {
+        el.innerHTML='';
+        const img=document.createElement('img');
+        img.src=b64;
+        img.style.cssText='width:100%;height:100%;object-fit:cover;border-radius:inherit;display:block';
+        el.appendChild(img);
+      }
+    });
+  }
+
+  const hooked=new WeakSet();
+  function hookInput(inp){
+    if(hooked.has(inp)) return;
+    hooked.add(inp);
+    inp.addEventListener('change',e=>{
+      const f=e.target.files[0];
+      if(!f||!f.type.startsWith('image/')) return;
+      let cont=inp.closest('[data-img-key]')||inp.parentElement;
+      if(!cont.dataset.imgKey) cont.dataset.imgKey='up__'+uid(inp);
+      compress(f,b64=>{saveImg(cont.dataset.imgKey,b64);badge()});
+    });
+  }
+
+  function badge(){
+    let b=document.getElementById('_ppg_badge');
+    if(!b){
+      b=document.createElement('div');
+      b.id='_ppg_badge';
+      b.style.cssText='position:fixed;bottom:20px;right:20px;background:linear-gradient(135deg,#4ade80,#22c55e);color:#fff;padding:10px 20px;border-radius:50px;font:600 13px sans-serif;box-shadow:0 4px 20px rgba(34,197,94,.4);z-index:99999;opacity:0;transform:translateY(10px);transition:all .3s;pointer-events:none';
+      b.textContent='✅ Tersimpan otomatis';
+      document.body.appendChild(b);
+    }
+    b.style.opacity='1';
+    b.style.transform='translateY(0)';
+    clearTimeout(b._t);
+    b._t=setTimeout(()=>{b.style.opacity='0';b.style.transform='translateY(10px)'},2500);
+  }
+
+  function addReset(){
+    const b=document.createElement('button');
+    b.style.cssText='position:fixed;bottom:20px;left:20px;background:#ef4444;color:#fff;border:none;padding:9px 16px;border-radius:50px;font:600 12px sans-serif;cursor:pointer;z-index:99999;box-shadow:0 4px 15px rgba(239,68,68,.35);opacity:.5;transition:opacity .2s';
+    b.textContent='🗑️ Reset Data';
+    b.onmouseover=()=>b.style.opacity='1';
+    b.onmouseleave=()=>b.style.opacity='0.5';
+    b.onclick=()=>{
+      if(confirm('Hapus semua data tersimpan?\nSemua teks dan foto akan kembali kosong.')){
+        localStorage.removeItem(TK);
+        localStorage.removeItem(IK);
+        location.reload();
+      }
+    };
+    document.body.appendChild(b);
+  }
+
+  new MutationObserver(ms=>ms.forEach(m=>m.addedNodes.forEach(n=>{
+    if(n.nodeType!==1) return;
+    if(n.tagName==='INPUT'&&n.type==='file') hookInput(n);
+    n.querySelectorAll&&n.querySelectorAll('input[type=file]').forEach(hookInput);
+  }))).observe(document.body,{childList:true,subtree:true});
+
+  function init(){
+    restoreTexts();
+    restoreImgs();
+    document.querySelectorAll('input[type=file]').forEach(hookInput);
+    document.addEventListener('input',e=>{
+      if(restoring||e.target.getAttribute('contenteditable')!=='true') return;
+      clearTimeout(timer);
+      timer=setTimeout(()=>{saveTexts();badge()},600);
+    });
+    document.addEventListener('blur',e=>{
+      if(e.target.getAttribute('contenteditable')==='true'){saveTexts();badge()}
+    },true);
+    window.addEventListener('beforeunload',saveTexts);
+    addReset();
+    console.log('✅ PPG AutoSave aktif — data tersimpan di localStorage');
+  }
+
+  document.readyState==='loading'?document.addEventListener('DOMContentLoaded',init):init();
+})();
+</script>
 </body>
 </html>
